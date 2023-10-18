@@ -1,0 +1,7 @@
+{
+  "name": "front-comprador",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

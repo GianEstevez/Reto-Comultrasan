@@ -1,0 +1,7 @@
+{
+  "name": "front-vendedor",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
