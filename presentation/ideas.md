@@ -27,8 +27,8 @@
 - El usuario puede **personalizar** los formularios creados por la entidad, añadir **imágenes** y fijar valores por defecto.
 - La entidad puede administar la cantidad de **QRs** que se pueden generar por cuenta.
 - El diseño de la solución es **intuitivo** y permite un fácil entendimiento tanto para el usuario como para el pagador.
-
-5. Arquitectura
+- Multiplataforma.
+- El despliegue del sistema es autónomo.
 
 ## Propuesta
 Ahora pasamos a comprobar las capacidades de nuestra solución desde los diferentes puentos de vista.
