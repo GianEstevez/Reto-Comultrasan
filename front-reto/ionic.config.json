@@ -1,7 +1,0 @@
-{
-  "name": "front-reto",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}

@@ -1,0 +1,26 @@
+/* Paleta de colores */
+:root {
+  --apple-green: #93c120;
+  --ghost-white: #f6f7fc;
+  --rich-black: #0d1821;
+  --ebony: #6b654b;
+  --hunter-green: #2a6041;
+}
+
+
+/* Estilos para elementos utilizando la paleta de colores */
+.element {
+  background-color: var(--apple-green);
+  color: var(--ghost-white);
+  border: 1px solid var(--rich-black);
+}
+
+.button-pse {
+  background-color: var(--ebony);
+  color: var(--ghost-white);
+}
+
+.button-fc {
+  background-color: var(--hunter-green);
+  color: var(--ghost-white);
+}
