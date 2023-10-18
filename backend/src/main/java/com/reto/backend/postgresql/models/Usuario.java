@@ -32,6 +32,4 @@ public class Usuario {
     @Column(nullable = false)
     private String correo;
 
-    @Column(nullable = false)
-    private Long limiteEnlacesPago;
 }

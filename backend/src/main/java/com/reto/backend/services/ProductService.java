@@ -45,6 +45,6 @@ public class ProductService {
         Producto producto = productoRepository.getProductoByCodigo(codigoProducto);
         List<EnlacePago> enlacesPago = enlacePagoRepository.getEnlacePagosByProducto(producto);
 
-        return enlacesPago.stream().map(ep -> new EnlaceDTO(ep.getCodigo(), ep.getNombre(), ep.getUrl())).toList();
+        return enlacesPago.stream().map(ep -> new EnlaceDTO(ep.getNombre(), ep.getCodigo(), ep.getUrl())).toList();
     }
 }

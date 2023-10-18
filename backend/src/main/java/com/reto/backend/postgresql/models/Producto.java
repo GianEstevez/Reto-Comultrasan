@@ -25,6 +25,9 @@ public class Producto {
     @Column(nullable = false, unique = true)
     private String codigo;
 
+    @Column(nullable = false)
+    private Long limiteEnlacesPago;
+
     @Transient
     private Double saldo;
 

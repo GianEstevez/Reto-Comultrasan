@@ -8,17 +8,21 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Entity
 @Document(collection = "plantillasEnlacePago")
-public class PlantillaEnlacePago {
+public class PlantillaEnlacePago implements Serializable {
 
     @Id
     private String id;
     private String codigo;
 
-    @ManyToOne
-    @JoinColumn(name = "plantilla_id")
+    private CampoCliente campoCliente;
+
+    private CampoComprador campoComprador;
+
     private Plantilla plantilla;
 }

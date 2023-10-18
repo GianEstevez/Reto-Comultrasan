@@ -1,4 +1,6 @@
 package com.reto.backend.mongodb.models;
 
-public record CampoPlantilla(String nombre, String regex, String contenido) {
+import java.io.Serializable;
+
+public record CampoPlantilla(String nombre, String regex, String contenido) implements Serializable {
 }

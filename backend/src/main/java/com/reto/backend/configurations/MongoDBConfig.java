@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
-@ComponentScan("com.reto.backend.mongodb")
+@EnableMongoRepositories(basePackages = {"com.reto.backend.mongodb"})
 public class MongoDBConfig {
 
     @Value("${spring.data.mongodb.host}")
@@ -22,7 +24,7 @@ public class MongoDBConfig {
 
     @Bean
     public MongoTemplate mongoTemplate() {
-        String connectionString = "mongodb://" + host + ":" + port + "/" + database;
+        String connectionString = "mongodb://gamma:1234@" + host + ":" + port + "/" + database;
 
         return new MongoTemplate(new SimpleMongoClientDatabaseFactory(connectionString));
     }
