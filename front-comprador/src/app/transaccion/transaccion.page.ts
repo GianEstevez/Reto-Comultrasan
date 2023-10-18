@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transaccion',
@@ -7,7 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransaccionPage implements OnInit {
 
-  constructor() { }
+  esTransaccionExitosa: boolean;
+
+  constructor(private router: Router) {
+    // Generar un número aleatorio (0 o 1)
+    const numeroAleatorio = Math.floor(Math.random() * 2);
+
+    // Determinar el resultado de la transacción basado en el número aleatorio
+    this.esTransaccionExitosa = numeroAleatorio === 0;
+  }
+
+  irAImprimirComprobante() {
+    // Redirigir a la página de comprobante-pago.html
+    this.router.navigate(['/comprobante-pago']);
+  }
 
   ngOnInit() {
   }

@@ -15,7 +15,8 @@ const routes: Routes = [
   {
     path: 'pasarela-pagos',
     loadChildren: () => import('./pasarela-pagos/pasarela-pagos.module').then( m => m.PasarelaPagosPageModule)
-  },  {
+  },
+  {
     path: 'transaccion',
     loadChildren: () => import('./transaccion/transaccion.module').then( m => m.TransaccionPageModule)
   },

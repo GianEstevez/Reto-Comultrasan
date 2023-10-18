@@ -1,18 +1,54 @@
 export const mockCampos = {
-    vendedor: {
-        nombre: 'Laura', 
-        nroCuenta: '*****6'
+    "id": "65303a6ddb6ebe19c967e04d",
+    "codigoEnlace": "rKycLt",
+    "codigoTransaccion": "y70byJi84S",
+    "vendedor": {
+        "nombre": "Edward",
+        "numeroCuenta": "98786262"
     },
-    comprador: [
-        {nombre: 'Nombre', contenido: 'Amigo', regex: '[a-z]'},
-        {nombre: 'Cedula', contenido: '3215', regex: '[0-9]'},
-        {nombre: 'Contacto', contenido: '3125236451', regex: '[0-9]'},
-        {nombre: 'Correo', contenido: '', regex: '^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9. -]+\\. [a-zA-Z]{2,}$'},
-    ],
-    valor: 12000,
-    plantilla: [
-        {nombre: 'Negocio', contenido: 'Arepas-san', regex: '[a-z]'},
-        {nombre: 'Contacto', contenido: '3215', regex: '[0-9]'},
-        {nombre: 'Descripción del Pago', contenido: 'pagué dos postres', regex: '[a-z]'},
-    ],
+    "comprador": {
+        "id": "65303a6ddb6ebe19c967e04a",
+        "codigo": "C1",
+        "nombre": "Datos de comprador",
+        "campos": [
+            {
+                "nombre": "Nombre",
+                "regex": "*",
+                "contenido": null
+            },
+            {
+                "nombre": "Cedula",
+                "regex": "*",
+                "contenido": null
+            },
+            {
+                "nombre": "Contacto",
+                "regex": "*",
+                "contenido": null
+            },
+            {
+                "nombre": "Correo electrónico",
+                "regex": "*",
+                "contenido": null
+            }
+        ]
+    },
+    "plantilla": {
+        "id": "65303a6ddb6ebe19c967e04b",
+        "codigo": "A1",
+        "nombre": "Tienda de bancos de sarmiendo angulo",
+        "campos": [
+            {
+                "nombre": "Modelo de carro",
+                "regex": "[a-zA-Z ]*",
+                "contenido": "Mazda"
+            },
+            {
+                "nombre": "Descripcion",
+                "regex": "[a-zA-Z ]*",
+                "contenido": "Un carrazo"
+            }
+        ]
+    },
+    "valor": null
 }

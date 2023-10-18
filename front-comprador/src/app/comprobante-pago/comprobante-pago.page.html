@@ -1,13 +1,43 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>comprobante-pago</ion-title>
+    <ion-title>Comprobante de Pago</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">comprobante-pago</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <!-- Logo -->
+  <div class="logo-container">
+    <img src="\..\..\assets\img\logofc.png" alt="Logo" style="position: inherit;height: 100px;">
+  </div>
+
+  <!-- Información de Transacción -->
+  <ion-card>
+    <ion-card-header>
+      Información de Transacción
+    </ion-card-header>
+    <ion-card-content>
+      <p>Transacción realizada el: 18 de octubre de 2023</p>
+      <p>Fecha de aplicación: 19 de octubre de 2023</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Detalles -->
+  <ion-card>
+    <ion-card-header>
+      Detalles
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Monto</ion-label>
+          <ion-label>$100.00</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Descripción</ion-label>
+          <ion-label>Descripción de los productos/servicios adquiridos.</ion-label>
+        </ion-item>
+        <!-- Agrega más detalles si es necesario -->
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

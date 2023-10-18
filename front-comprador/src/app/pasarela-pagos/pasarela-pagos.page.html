@@ -16,15 +16,19 @@
     <ion-item-divider>
       <ion-label>Información del negocio</ion-label>
     </ion-item-divider>
+    <div style="text-align: center; margin-top: 20px;">
+      <img src="../../assets/img/chad.jpg" alt="Logo" width="100px" height="100px" style="border-radius: 50%;">
+    </div>
     <form (ngSubmit)="onSubmit()">
-      <ion-item *ngFor="let campo of mockCampos?.plantilla">
-        <ion-label position="floating">{{ campo?.nombre }}</ion-label>
-        <ion-input
-          type="{{ campo?.regex }}"
-          value="{{ campo?.contenido }}"
-          [(ngModel)]="negocioData[campo.contenido]"
-          disabled
-        ></ion-input>
+      <ion-item *ngIf="mockCampos?.plantilla">
+        <ion-item *ngFor="let campo of mockCampos?.plantilla?.campos" >
+          <ion-label position="floating">{{ campo?.nombre }}</ion-label>
+          <ion-input
+            pattern="{{ campo?.regex }}"
+            value="{{ campo?.contenido }}"
+            disabled
+          ></ion-input>
+        </ion-item>
       </ion-item>
     </form>
   </ion-list>
@@ -35,18 +39,25 @@
       <ion-label>Información del pagador</ion-label>
     </ion-item-divider>
     <form (ngSubmit)="onSubmitComprador()">
-      <ng-container *ngFor="let campo of mockCampos?.comprador">
-        <ion-item *ngIf="compradorData[campo.contenido] !== ''">
+      <ng-container *ngIf="mockCampos?.comprador">
+        <ion-item *ngFor="let campo of mockCampos?.comprador?.campos">
           <ion-label position="floating">{{ campo?.nombre }}</ion-label>
           <ion-input
-            type="{{ campo?.regex }}"
+            pattern="{{ campo?.regex }}"
             value="{{ campo?.contenido }}"
-            [(ngModel)]="compradorData[campo.contenido]"
           ></ion-input>
         </ion-item>
       </ng-container>
+
     </form>
   </ion-list>
 
-  <ion-button expand="full" type="submit">Enviar</ion-button>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button expand="full" (click)="procesarPago('PSE')">PSE</ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button expand="full" (click)="procesarPago('FC')">FC</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

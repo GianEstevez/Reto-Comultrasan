@@ -1,50 +1,18 @@
-
 <ion-header>
   <ion-toolbar>
-    <ion-title>Formulario de Pago</ion-title>
+    <ion-title>
+      Ionic Home
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
     <ion-card-header>
-      Ingrese los detalles del Pago
+      Bienvenido a mi aplicación Ionic
     </ion-card-header>
     <ion-card-content>
-      <form (ngSubmit)="submitForm()">
-        <ion-list>
-          <ion-item *ngFor="let input of inputs">
-            <ion-label position="floating">{{ input.label }}</ion-label>
-            <ion-input type="text" [(ngModel)]="input.value" name="input.name"></ion-input>
-          </ion-item>
-        </ion-list>
-
-        <ion-button expand="full" (click)="addInput()">Agregar Campo</ion-button>
-        <ion-button expand="full" type="submit">Enviar</ion-button>
-      </form>
-      <ion-item>
-        <ion-label position="floating">Monto</ion-label>
-        <ion-input type="number" [(ngModel)]="monto" name="monto"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Descripción</ion-label>
-        <ion-input type="text" [(ngModel)]="descripcion" name="descripcion"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">ID del Comprador</ion-label>
-        <ion-input type="text" [(ngModel)]="idComprador" name="idComprador"></ion-input>
-      </ion-item>
-
-      <ion-row>
-        <ion-col size="6">
-          <ion-button expand="full" (click)="procesarPago('PSE')">PSE</ion-button>
-        </ion-col>
-        <ion-col size="6">
-          <ion-button expand="full" (click)="procesarPago('FC')">FC</ion-button>
-        </ion-col>
-      </ion-row>
+      Esta es la página de inicio de tu aplicación Ionic. ¡Comienza a construir algo asombroso!
     </ion-card-content>
   </ion-card>
 </ion-content>
