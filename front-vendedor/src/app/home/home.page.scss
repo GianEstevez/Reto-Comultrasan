@@ -25,3 +25,72 @@
 #container a {
   text-decoration: none;
 }
+
+.header {
+  height: 120px;
+  background: #2A6041;
+  width: 100%;
+  .texts{
+    padding-top: 40px;
+    padding-left: 20px;
+    .main--text{
+      margin: 0;
+      font-size: 30px;
+    }
+    .secondary--text{
+      margin: 0;
+      font-size: 18px;
+    }
+  }
+}
+
+.bottom--header {
+  height: 100%;
+  background: white;
+  width: 100%;
+  p {
+    margin: 0;
+    color: #0D1821;
+  }
+
+  .main--text{
+    padding-top: 34px;
+    padding-bottom: 14px;
+    padding-left: 24px;
+  }
+
+  .scroll-container {
+    padding-left: 24px !important;
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+    gap: 30px; /* Ajusta el espaciado entre las cards según lo necesites */
+    width: calc(100% + 20px); /* Asegúrate de incluir el margen derecho de las cards */
+    .card {
+      margin-bottom: 20px;
+      background: #f0f0f0;
+      border-radius: 10px;
+      height: 300px;
+      width: 300px; /* Ancho fijo para cada card */
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      flex-shrink: 0; /* Evita que las cards se encogen */
+      .card--content{
+        ion-icon {
+          color: #0D1821;
+          font-size: 32px;  
+        }
+        padding-top: 24px;
+        padding-left: 24px;
+        .eye--account-number{
+          ion-icon{
+            font-size: 18px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.card-content {
+  /* Estilos para el contenido de la tarjeta */
+}

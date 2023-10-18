@@ -1,0 +1,55 @@
+<ion-content [fullscreen]="true" scrollY="false">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">enlaces</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="header">
+
+    <div class="back--button" style="position: absolute; top: 0; left: 0; z-index: 1;">
+      <button (click)="volverAtras()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </div>
+    
+    <div class="header--title">
+      <p> <b>  {{ obtenerTresPrimerasPalabras(nombreCuenta) }} - {{ obtenerUltimos4Digitos(numeroCuenta)  }} </b>  </p>
+      <p> </p>
+    </div>
+    <div class="saldo">
+      <p> Saldo disponible: </p> 
+      <div style="display: flex; justify-content: center;">
+        <div>
+          <p style="font-size: 25px;">
+            $ <span (click)="toggleMostrarSaldo()">
+              {{ mostrarSaldo ? saldoCuenta.toLocaleString('es-ES') : '***' }}
+            </span>
+          </p>
+        </div>
+        <div (click)="toggleMostrarSaldo()" style="display: flex; align-items: center; padding-left: 12px; font-size: 20px; scale: 1.2;">
+          <ion-icon *ngIf="!mostrarSaldo" name="eye-outline"></ion-icon>
+          <ion-icon *ngIf="mostrarSaldo" name="eye-off-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="bottom--header">
+    
+    <p class="main--text">En este módulo encontrarás los enlaces a tus pagos.</p>
+
+    <div class="main--content" *ngFor="let enlace of enlacesData">
+        <div class="enlaces">
+          <div (click)="goToQR(enlace.codigo, enlace.nombre)" class="item">
+            <p> {{ enlace.nombre }} </p>
+          </div>
+          <div>
+             <button (click)="copiarAlPortapapeles(enlace.url + enlace.codigo)" class="boton-copiar">
+            <ion-icon name="copy-outline"></ion-icon>
+          </button> 
+          </div>
+        </div>
+    </div>
+  </div>
+
+</ion-content>

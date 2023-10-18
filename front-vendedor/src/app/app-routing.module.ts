@@ -11,6 +11,14 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'enlaces/:numerocuenta',
+    loadChildren: () => import('./enlaces/enlaces.module').then( m => m.EnlacesPageModule)
+  },
+  {
+    path: 'qr/:codigoenlace/:enlacenombre',
+    loadChildren: () => import('./qr/qr.module').then( m => m.QrPageModule)
+  },
 ];
 
 @NgModule({
