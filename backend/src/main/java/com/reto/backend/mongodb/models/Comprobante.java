@@ -14,12 +14,13 @@ public class Comprobante {
 
     @Id
     String id;
+    String codigoTransaccion;
+
+    String codigoEnlace;
 
     PlantillaEnlacePago plantillaEnlacePago;
 
+
     Boolean exitosa;
 
-    String getCodigoTransaccion(){
-        return this.plantillaEnlacePago.getCodigoTransaccion();
-    }
 }

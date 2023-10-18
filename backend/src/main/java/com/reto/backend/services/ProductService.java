@@ -1,6 +1,7 @@
 package com.reto.backend.services;
 
 import com.reto.backend.dtos.EnlaceDTO;
+import com.reto.backend.dtos.EnlacesProductoDTO;
 import com.reto.backend.dtos.ProductoDTO;
 import com.reto.backend.dtos.ProductosUsuarioDTO;
 import com.reto.backend.postgresql.models.EnlacePago;
@@ -41,10 +42,12 @@ public class ProductService {
 
     }
 
-    public List<EnlaceDTO> getEnlacesPagoFromCodigoProducto(String codigoProducto){
+    public EnlacesProductoDTO getEnlacesPagoFromCodigoProducto(String codigoProducto){
         Producto producto = productoRepository.getProductoByCodigo(codigoProducto);
         List<EnlacePago> enlacesPago = enlacePagoRepository.getEnlacePagosByProducto(producto);
 
-        return enlacesPago.stream().map(ep -> new EnlaceDTO(ep.getNombre(), ep.getCodigo(), ep.getUrl())).toList();
+        List<EnlaceDTO> enlacesDTO = enlacesPago.stream().map(ep -> new EnlaceDTO(ep.getNombre(), ep.getCodigo(), ep.getUrl())).toList();
+
+        return new EnlacesProductoDTO(producto.getLimiteEnlacesPago(), enlacesDTO);
     }
 }

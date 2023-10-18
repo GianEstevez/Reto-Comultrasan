@@ -1,6 +1,7 @@
 package com.reto.backend.controllers;
 
 import com.reto.backend.dtos.EnlaceDTO;
+import com.reto.backend.dtos.EnlacesProductoDTO;
 import com.reto.backend.dtos.ProductosUsuarioDTO;
 import com.reto.backend.services.ProductService;
 import com.reto.backend.services.TestDataService;
@@ -28,7 +29,7 @@ public class ProductController {
     }
 
     @GetMapping("enlacesPago")
-    public ResponseEntity<List<EnlaceDTO>> getEnlacesPago(@RequestParam("codigoProducto") String codigoProducto){
+    public ResponseEntity<EnlacesProductoDTO> getEnlacesPago(@RequestParam("codigoProducto") String codigoProducto){
 
         // Return 200 OK
         return ResponseEntity.ok(productService.getEnlacesPagoFromCodigoProducto(codigoProducto));

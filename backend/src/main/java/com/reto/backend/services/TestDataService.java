@@ -2,12 +2,11 @@ package com.reto.backend.services;
 
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.reto.backend.mongodb.models.CampoPlantilla;
-import com.reto.backend.mongodb.models.Plantilla;
-import com.reto.backend.mongodb.models.PlantillaEnlacePago;
-import com.reto.backend.mongodb.models.Vendedor;
+import com.reto.backend.mongodb.models.*;
+import com.reto.backend.mongodb.repositories.ComprobanteRepository;
 import com.reto.backend.mongodb.repositories.PlantillaEnlacePagoRepository;
 import com.reto.backend.mongodb.repositories.PlantillaRepository;
 import com.reto.backend.postgresql.models.*;
@@ -34,6 +33,10 @@ public class TestDataService {
     @Autowired
     private PlantillaEnlacePagoRepository plantillaEnlacePagoRepository;
 
+    @Autowired
+    private ComprobanteRepository comprobanteRepository;
+
+    private List<PlantillaEnlacePago> plantillaEnlacePagos = new ArrayList<>();
 
     public void initializeTestData() {
         CampoPlantilla campo1 = new CampoPlantilla("Descripcion", "[a-zA-Z\s]*", null);
@@ -81,6 +84,14 @@ public class TestDataService {
 
         Transaccion transaccion3 = createTransaccion(producto3, 1000000d, true);
         createTransaccionEnlace(enlace3, transaccion3, "192.168.1.3", "fingerprint3");
+
+        createComprobante(transaccion2, plantillaEnlacePagos.get(0));
+        createComprobante(transaccion2, plantillaEnlacePagos.get(3));
+        createComprobante(transaccion2, plantillaEnlacePagos.get(4));
+        createComprobante(transaccion2, plantillaEnlacePagos.get(5));
+        createComprobante(transaccion3, plantillaEnlacePagos.get(1));
+
+
     }
 
     private Usuario createUsuario(String primerNombre, String primerApellido, String numeroTelefono, String correo){
@@ -120,7 +131,8 @@ public class TestDataService {
 
         enlacePagoRepository.save(enlacePago);
 
-        createPlantillaEnlacePago(codigo, plantilla, vendedor, comprador);
+        var pep = createPlantillaEnlacePago(codigo, plantilla, vendedor, comprador);
+        plantillaEnlacePagos.add(pep);
 
         return enlacePago;
     }
@@ -142,6 +154,7 @@ public class TestDataService {
         transaccionEnlace.setTransaccion(transaccion);
         transaccionEnlace.setIp(ip);
         transaccionEnlace.setHuella(huella);
+
         transaccionEnlaceRepository.save(transaccionEnlace);
     }
 
@@ -156,7 +169,7 @@ public class TestDataService {
         return plantilla;
     }
 
-    private void createPlantillaEnlacePago(String codigo, Plantilla plantilla, Vendedor vendedor, Plantilla comprador){
+    private PlantillaEnlacePago createPlantillaEnlacePago(String codigo, Plantilla plantilla, Vendedor vendedor, Plantilla comprador){
         PlantillaEnlacePago plantillaEnlacePago = new PlantillaEnlacePago();
         plantillaEnlacePago.setCodigoEnlace(codigo);
         plantillaEnlacePago.setPlantilla(plantilla);
@@ -165,5 +178,18 @@ public class TestDataService {
 
         plantillaEnlacePagoRepository.save(plantillaEnlacePago);
 
+        return plantillaEnlacePago;
+    }
+
+    private Comprobante createComprobante(Transaccion transaccion, PlantillaEnlacePago plantillaEnlacePago){
+        Comprobante comprobante = new Comprobante();
+
+        comprobante.setCodigoEnlace(plantillaEnlacePago.getCodigoEnlace());
+        comprobante.setCodigoTransaccion(transaccion.getCodigo());
+        comprobante.setPlantillaEnlacePago(plantillaEnlacePago);
+
+        comprobanteRepository.save(comprobante);
+
+        return comprobante;
     }
 }
