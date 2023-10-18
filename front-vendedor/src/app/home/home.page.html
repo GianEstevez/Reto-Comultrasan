@@ -1,20 +1,53 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" scrollY="false">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="header">
+    <div class="texts">
+      <p style="font-weight: 500;" class="main--text"> Hola, {{ productosData?.nombreUsuario | titlecase }}!</p>
+    </div>
   </div>
+  <div class="bottom--header">
+    https://localhost:8100/pago/BOsusN
+    <p class="main--text"> Tus productos </p>
+
+    <div class="scroll-container">
+      <div class="card" *ngFor="let producto of productosData?.productos; let i = index">
+        <div class="card--content">
+          <ion-icon name="cash-outline"></ion-icon>
+          <p style="font-weight: 500">
+            {{ producto.tipo_cuenta }}
+          </p>
+          <div class="eye--account-number" style="display: flex;">
+            <p (click)="toggleMostrarUltimos4Digitos(i)">
+              {{ mostrarUltimos4Digitos[i] ? producto.numero_cuenta : '*' + producto.numero_cuenta.slice(-4)}}
+            </p>
+            <div (click)="toggleMostrarUltimos4Digitos(i)" style="display: flex; align-items: center; padding-left: 8px; font-size: 18px; scale: 1.2;">
+              <ion-icon *ngIf="!mostrarUltimos4Digitos[i]" name="eye-outline"></ion-icon>
+              <ion-icon *ngIf="mostrarUltimos4Digitos[i]" name="eye-off-outline"></ion-icon>
+            </div>
+          </div>
+          <p style="padding-top: 24px;"> Disponible:</p>
+          <p style="font-size: 25px;">
+            <span (click)="toggleMostrarSaldo(i)">
+              $ {{ mostrarSaldo[i] ? producto.saldo.toLocaleString('es-ES') : '***' }}
+            </span>
+          </p>
+          <div>
+           <p class="pay--text" style="padding-top: 60px;" (click)="goToProduct(producto.numero_cuenta)" >Pagos ></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    
+  </div>
+
+
+
 </ion-content>
