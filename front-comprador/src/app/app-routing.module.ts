@@ -4,8 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./pasarela-pagos/pasarela-pagos.module').then( m => m.PasarelaPagosPageModule)
-    //import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
     path: '',
@@ -23,6 +22,10 @@ const routes: Routes = [
   {
     path: 'comprobante-pago',
     loadChildren: () => import('./comprobante-pago/comprobante-pago.module').then( m => m.ComprobantePagoPageModule)
+  },
+  {
+    path: 'pago/:codigo',
+    loadChildren: () => import('./pago/pago.module').then( m => m.PagoPageModule)
   },
 
 

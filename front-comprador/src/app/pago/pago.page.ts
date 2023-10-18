@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { mockCampos } from 'src/app/mocks/mockCampos'
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-pago',
+  templateUrl: './pago.page.html',
+  styleUrls: ['./pago.page.scss'],
 })
-export class HomePage  {
+export class PagoPage implements OnInit {
   mockCampos = mockCampos;
   negocioData: any = mockCampos.plantilla;
   compradorData: any = mockCampos.comprador;
@@ -48,3 +48,4 @@ export class HomePage  {
     }
   }
 }
+
