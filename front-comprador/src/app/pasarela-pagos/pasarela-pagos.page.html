@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>PasarelaPagos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">PasarelaPagos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Sección del negocio -->
+  <ion-list>
+    <ion-item-divider>
+      <ion-label>Información del negocio</ion-label>
+    </ion-item-divider>
+    <form (ngSubmit)="onSubmit()">
+      <ion-item *ngFor="let campo of mockCampos?.plantilla">
+        <ion-label position="floating">{{ campo?.nombre }}</ion-label>
+        <ion-input
+          type="{{ campo?.regex }}"
+          value="{{ campo?.contenido }}"
+          [(ngModel)]="negocioData[campo.contenido]"
+          disabled
+        ></ion-input>
+      </ion-item>
+    </form>
+  </ion-list>
+
+  <!-- Sección de campos básicos del pagador -->
+  <ion-list>
+    <ion-item-divider>
+      <ion-label>Información del pagador</ion-label>
+    </ion-item-divider>
+    <form (ngSubmit)="onSubmitComprador()">
+      <ng-container *ngFor="let campo of mockCampos?.comprador">
+        <ion-item *ngIf="compradorData[campo.contenido] !== ''">
+          <ion-label position="floating">{{ campo?.nombre }}</ion-label>
+          <ion-input
+            type="{{ campo?.regex }}"
+            value="{{ campo?.contenido }}"
+            [(ngModel)]="compradorData[campo.contenido]"
+          ></ion-input>
+        </ion-item>
+      </ng-container>
+    </form>
+  </ion-list>
+
+  <ion-button expand="full" type="submit">Enviar</ion-button>
+</ion-content>
