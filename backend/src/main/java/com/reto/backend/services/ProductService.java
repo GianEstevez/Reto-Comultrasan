@@ -2,6 +2,7 @@ package com.reto.backend.services;
 
 import com.reto.backend.dtos.EnlaceDTO;
 import com.reto.backend.dtos.ProductoDTO;
+import com.reto.backend.dtos.ProductosUsuarioDTO;
 import com.reto.backend.postgresql.models.EnlacePago;
 import com.reto.backend.postgresql.models.Producto;
 import com.reto.backend.postgresql.models.Usuario;
@@ -25,7 +26,7 @@ public class ProductService {
     @Autowired
     EnlacePagoRepository enlacePagoRepository;
 
-    public List<ProductoDTO> getProductosFromIdUsuario(Long idUsuario){
+    public ProductosUsuarioDTO getProductosFromIdUsuario(Long idUsuario){
         Usuario usuario = usuarioRepository.getReferenceById(idUsuario);
         List<Producto> productos = productoRepository.getProductosByUsuario(usuario);
 
@@ -34,7 +35,9 @@ public class ProductService {
             producto.updateSaldo(productoRepository);
         }
 
-        return productos.stream().map(p -> new ProductoDTO(p.getNombre(), p.getCodigo(), p.getSaldo())).toList();
+        List<ProductoDTO> productosDTO =  productos.stream().map(p -> new ProductoDTO(p.getNombre(), p.getCodigo(), p.getSaldo())).toList();
+
+        return new ProductosUsuarioDTO(idUsuario, usuario.getPrimerNombre(), productosDTO);
 
     }
 
