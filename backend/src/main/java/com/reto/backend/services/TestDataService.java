@@ -3,20 +3,17 @@ package com.reto.backend.services;
 
 import java.time.Instant;
 
-import com.reto.backend.models.EnlacePago;
-import com.reto.backend.models.Producto;
-import com.reto.backend.models.Transaccion;
-import com.reto.backend.models.TransaccionEnlace;
-import com.reto.backend.repositories.EnlacePagoRepository;
-import com.reto.backend.repositories.ProductoRepository;
-import com.reto.backend.repositories.TransaccionEnlaceRepository;
-import com.reto.backend.repositories.TransaccionRepository;
+import com.reto.backend.models.*;
+import com.reto.backend.repositories.*;
+import com.reto.backend.utils.RandomGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TestDataInitializacionService {
+public class TestDataService {
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
     @Autowired
     private EnlacePagoRepository enlacePagoRepository;
     @Autowired
@@ -27,40 +24,50 @@ public class TestDataInitializacionService {
     private TransaccionEnlaceRepository transaccionEnlaceRepository;
 
     public void initializeTestData() {
+
+        Usuario yuri = usuarioRepository.getReferenceById(1L);
+        Usuario edward = usuarioRepository.getReferenceById(2L);
+        Usuario gian = usuarioRepository.getReferenceById(3L);
+
         // Crear tres productos de ejemplo
-        Producto producto1 = createProducto("Producto 1", "COD1");
-        Producto producto2 = createProducto("Producto 2", "COD2");
-        Producto producto3 = createProducto("Producto 3", "COD3");
+        Producto producto1 = createProducto("Cuenta de Ahorros", "COD1", yuri);
+        Producto producto2 = createProducto("Cuenta de Ahorros Amiga", "COD2", edward);
+        Producto producto3 = createProducto("Cuenta de Ahorros Enemiga", "COD3", edward);
+        Producto producto4 = createProducto("Cuenta de Ahorros de Broma", "COD4", gian);
 
         // Crear enlaces de pago
-        EnlacePago enlace1 = createEnlacePago(producto1, Instant.now(), Instant.now().plusSeconds(3600));
-        EnlacePago enlace2 = createEnlacePago(producto2, Instant.now(), Instant.now().plusSeconds(3600));
-        EnlacePago enlace3 = createEnlacePago(producto3, Instant.now(), Instant.now().plusSeconds(3600));
+        EnlacePago enlace1 = createEnlacePago(producto2, Instant.now(), Instant.now().plusSeconds(3600));
+        EnlacePago enlace2 = createEnlacePago(producto3, Instant.now(), Instant.now().plusSeconds(36000));
+        EnlacePago enlace3 = createEnlacePago(producto4, Instant.now(), Instant.now().plusSeconds(360000));
 
         // Crear transacciones y enlaces a los enlaces de pago
-        Transaccion transaccion1 = createTransaccion(producto1, 100.0);
-        TransaccionEnlace transaccionEnlace1 = createTransaccionEnlace(enlace1, transaccion1, "192.168.1.1", Instant.now(), "fingerprint1");
+        Transaccion transaccion1 = createTransaccion(producto1, 10000d);
+        createTransaccionEnlace(enlace1, transaccion1, "192.168.1.1", "fingerprint1");
 
-        Transaccion transaccion2 = createTransaccion(producto2, 200.0);
-        TransaccionEnlace transaccionEnlace2 = createTransaccionEnlace(enlace2, transaccion2, "192.168.1.2", Instant.now(), "fingerprint2");
+        Transaccion transaccion2 = createTransaccion(producto2, 900000d);
+        createTransaccionEnlace(enlace2, transaccion2, "192.168.1.2", "fingerprint2");
 
-        Transaccion transaccion3 = createTransaccion(producto3, 150.0);
-        TransaccionEnlace transaccionEnlace3 = createTransaccionEnlace(enlace3, transaccion3, "192.168.1.3", Instant.now(), "fingerprint3");
+        Transaccion transaccion3 = createTransaccion(producto3, 1000000d);
+        createTransaccionEnlace(enlace3, transaccion3, "192.168.1.3", "fingerprint3");
     }
 
-    private Producto createProducto(String nombre, String codigo) {
+    private Producto createProducto(String nombre, String codigo, Usuario usuario) {
         Producto producto = new Producto();
         producto.setNombre(nombre);
         producto.setCodigo(codigo);
+        producto.setUsuario(usuario); // Set the Usuario for the Producto
         productoRepository.save(producto);
         return producto;
     }
 
+
     private EnlacePago createEnlacePago(Producto producto, Instant fechaHoraDesde, Instant fechaHoraHasta) {
         EnlacePago enlacePago = new EnlacePago();
         enlacePago.setProducto(producto);
+        enlacePago.setCodigo(RandomGenerator.generateRandomString(6));
         enlacePago.setFechaHoraDesde(fechaHoraDesde);
         enlacePago.setFechaHoraHasta(fechaHoraHasta);
+        enlacePago.setActivo(true);
         enlacePagoRepository.save(enlacePago);
         return enlacePago;
     }
@@ -73,15 +80,12 @@ public class TestDataInitializacionService {
         return transaccion;
     }
 
-    private TransaccionEnlace createTransaccionEnlace(EnlacePago enlacePago, Transaccion transaccion, String ip,
-                                                      Instant fechaHora, String huella) {
+    private void createTransaccionEnlace(EnlacePago enlacePago, Transaccion transaccion, String ip, String huella) {
         TransaccionEnlace transaccionEnlace = new TransaccionEnlace();
         transaccionEnlace.setEnlacePago(enlacePago);
         transaccionEnlace.setTransaccion(transaccion);
         transaccionEnlace.setIp(ip);
-        transaccionEnlace.setFechaHora(fechaHora);
         transaccionEnlace.setHuella(huella);
         transaccionEnlaceRepository.save(transaccionEnlace);
-        return transaccionEnlace;
     }
 }

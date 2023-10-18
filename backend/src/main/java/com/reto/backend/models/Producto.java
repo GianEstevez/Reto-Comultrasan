@@ -1,30 +1,39 @@
 package com.reto.backend.models;
 
+import com.reto.backend.repositories.ProductoRepository;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-@Table(name = "USUARIOS")
+@Getter
+@Setter
 @Entity
-public class Usuario {
+@Table(name = "PRODUCTOS")
+public class Producto {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String primerNombre;
+    @ManyToOne
+    @JoinColumn(name="id_usuario", nullable = false)
+    private Usuario usuario;
 
-    @Column
-    private String segundoNombre;
+    @Column(nullable = false)
+    private String nombre;
 
-    @Column
-    private String primerApellido;
+    @Column(nullable = false)
+    private String codigo;
 
-    @Column
-    private String segundoApellido;
+    @Transient
+    private Double saldo;
 
-    @Column
-    private String numeroTelefono;
+    public void updateSaldo(ProductoRepository productoRepository) {
+        // Use the repository to calculate the saldo
+        Double calculatedSaldo = productoRepository.calculateSaldo(this);
 
-    @Column
-    private String correo;
+        // Set the calculated saldo to the saldo field
+        this.saldo = calculatedSaldo != null ? calculatedSaldo : 0;
+    }
+
 }

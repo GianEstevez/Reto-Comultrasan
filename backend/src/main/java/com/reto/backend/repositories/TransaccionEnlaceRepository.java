@@ -1,4 +1,7 @@
 package com.reto.backend.repositories;
 
-public interface TransaccionEnlaceRepository extends org.springframework.data.jpa.repository.JpaRepository<com.reto.backend.models.TransaccionEnlace, java.lang.Long> {
+import com.reto.backend.models.TransaccionEnlace;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TransaccionEnlaceRepository extends JpaRepository<TransaccionEnlace, Long> {
 }

@@ -1,6 +1,5 @@
 package com.reto.backend.dtos;
 
 
-public record UserData(Long userId){
-
+public record UserDataDTO(Long userId){
 }

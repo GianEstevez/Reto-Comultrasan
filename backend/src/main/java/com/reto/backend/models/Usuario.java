@@ -8,27 +8,30 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "USUARIOS")
-public class Persona {
+public class Usuario {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String primerNombre;
 
     @Column
     private String segundoNombre;
 
-    @Column
+    @Column(nullable = false)
     private String primerApellido;
 
     @Column
     private String segundoApellido;
 
-    @Column
+    @Column(nullable = false)
     private String numeroTelefono;
 
-    @Column
+    @Column(nullable = false)
     private String correo;
+
+    @Column(nullable = false)
+    private Long limiteEnlacesPago;
 }
