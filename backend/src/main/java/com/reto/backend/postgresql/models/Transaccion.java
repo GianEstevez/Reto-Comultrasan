@@ -27,5 +27,8 @@ public class Transaccion {
     private Double valor;
 
     @Column(nullable = false)
+    private Boolean exitosa;
+
+    @Column(nullable = false)
     private Instant fechaHora = Instant.now();
 }

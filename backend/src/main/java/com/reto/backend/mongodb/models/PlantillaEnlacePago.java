@@ -2,8 +2,7 @@ package com.reto.backend.mongodb.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,11 +17,16 @@ public class PlantillaEnlacePago implements Serializable {
 
     @Id
     private String id;
-    private String codigo;
+    private String codigoEnlace;
 
-    private CampoCliente campoCliente;
+    @Transient
+    private String codigoTransaccion;
 
-    private CampoComprador campoComprador;
+    private Vendedor vendedor;
+
+    private Plantilla comprador;
 
     private Plantilla plantilla;
+
+    private Double valor;
 }

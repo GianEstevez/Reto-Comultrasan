@@ -5,5 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface PlantillaEnlacePagoRepository extends MongoRepository<PlantillaEnlacePago, String> {
 
-    PlantillaEnlacePago getPlantillaEnlacePagoByCodigo(String codigo);
+    PlantillaEnlacePago getPlantillaEnlacePagoByCodigoEnlace(String codigoEnlace);
 }

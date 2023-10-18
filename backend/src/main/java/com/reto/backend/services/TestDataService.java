@@ -7,6 +7,7 @@ import java.util.List;
 import com.reto.backend.mongodb.models.CampoPlantilla;
 import com.reto.backend.mongodb.models.Plantilla;
 import com.reto.backend.mongodb.models.PlantillaEnlacePago;
+import com.reto.backend.mongodb.models.Vendedor;
 import com.reto.backend.mongodb.repositories.PlantillaEnlacePagoRepository;
 import com.reto.backend.mongodb.repositories.PlantillaRepository;
 import com.reto.backend.postgresql.models.*;
@@ -39,6 +40,13 @@ public class TestDataService {
         CampoPlantilla campo2 = new CampoPlantilla("Modelo de carro", "[a-zA-Z\s]*", "Mazda");
         CampoPlantilla campo3 = new CampoPlantilla("Numero de apartamento", "[0-9]+", null);
 
+        CampoPlantilla nombre = new CampoPlantilla("Nombre", "*", null);
+        CampoPlantilla cedula = new CampoPlantilla("Cedula", "*", null);
+        CampoPlantilla contacto = new CampoPlantilla("Contacto", "*", null);
+        CampoPlantilla correo = new CampoPlantilla("Correo electrónico", "*", null);
+
+        Plantilla plantillaComprador = createPlantilla("Datos de comprador", "C1", List.of(nombre, cedula, contacto, correo));
+
         Plantilla plantilla1 = createPlantilla("Tienda de bancos de sarmiendo angulo", "A1", List.of(campo2, campo1));
         Plantilla plantilla2 = createPlantilla("Pagos de arriendo", "B2", List.of(campo3, campo1));
 
@@ -52,24 +60,26 @@ public class TestDataService {
         Producto producto3 = createProducto("Cuenta de Ahorros Enemiga", "9381112", edward, 4L);
         Producto producto4 = createProducto("Cuenta de Ahorros de Broma", "92929383", gian, 3L);
 
+        Vendedor vendedorEdward = new Vendedor(edward.getPrimerNombre(), producto2.getCodigo());
+        Vendedor vendedorGian = new Vendedor(gian.getPrimerNombre(), producto4.getCodigo());
 
         // Crear enlaces de pago
-        EnlacePago enlace1 = createEnlacePago(producto2, Instant.now(), Instant.now().plusSeconds(3600), plantilla1, "Pago de tamales");
-        EnlacePago enlace2 = createEnlacePago(producto3, Instant.now(), Instant.now().plusSeconds(36000), plantilla2, "Pago de Comida");
-        EnlacePago enlace3 = createEnlacePago(producto4, Instant.now(), Instant.now().plusSeconds(360000), plantilla1, "Pago de Negocio");
+        EnlacePago enlace1 = createEnlacePago(producto2, Instant.now(), Instant.now().plusSeconds(3600), plantilla1, "Pago de tamales", vendedorEdward, plantillaComprador);
+        EnlacePago enlace2 = createEnlacePago(producto3, Instant.now(), Instant.now().plusSeconds(36000), plantilla2, "Pago de Comida", vendedorEdward, plantillaComprador);
+        EnlacePago enlace3 = createEnlacePago(producto4, Instant.now(), Instant.now().plusSeconds(360000), plantilla1, "Pago de Negocio", vendedorGian, plantillaComprador);
 
-        createEnlacePago(producto2, Instant.now(), Instant.now().plusSeconds(360000), plantilla2, "Pago de arriendo");
-        createEnlacePago(producto2, Instant.now(), Instant.now().plusSeconds(360000), plantilla2, "Pago de Panes");
-        createEnlacePago(producto2, Instant.now(), Instant.now().plusSeconds(360000), plantilla2, "Pago de Carros");
+        createEnlacePago(producto2, Instant.now(), Instant.now().plusSeconds(360000), plantilla2, "Pago de arriendo",  vendedorEdward, plantillaComprador);
+        createEnlacePago(producto2, Instant.now(), Instant.now().plusSeconds(360000), plantilla2, "Pago de Panes",  vendedorEdward, plantillaComprador);
+        createEnlacePago(producto2, Instant.now(), Instant.now().plusSeconds(360000), plantilla2, "Pago de Carros",  vendedorEdward, plantillaComprador);
 
         // Crear transacciones y enlaces a los enlaces de pago
-        Transaccion transaccion1 = createTransaccion(producto1, 10000d);
+        Transaccion transaccion1 = createTransaccion(producto1, 10000d, true);
         createTransaccionEnlace(enlace1, transaccion1, "192.168.1.1", "fingerprint1");
 
-        Transaccion transaccion2 = createTransaccion(producto2, 900000d);
+        Transaccion transaccion2 = createTransaccion(producto2, 900000d, true);
         createTransaccionEnlace(enlace2, transaccion2, "192.168.1.2", "fingerprint2");
 
-        Transaccion transaccion3 = createTransaccion(producto3, 1000000d);
+        Transaccion transaccion3 = createTransaccion(producto3, 1000000d, true);
         createTransaccionEnlace(enlace3, transaccion3, "192.168.1.3", "fingerprint3");
     }
 
@@ -97,12 +107,12 @@ public class TestDataService {
     }
 
 
-    private EnlacePago createEnlacePago(Producto producto, Instant fechaHoraDesde, Instant fechaHoraHasta, Plantilla plantilla, String nombre) {
+    private EnlacePago createEnlacePago(Producto producto, Instant fechaHoraDesde, Instant fechaHoraHasta, Plantilla plantilla, String nombre, Vendedor vendedor, Plantilla comprador) {
         EnlacePago enlacePago = new EnlacePago();
         String codigo = RandomGenerator.generateRandomString(6);
         enlacePago.setProducto(producto);
         enlacePago.setCodigo(codigo);
-        enlacePago.setNombre("Enlace de pago" + RandomGenerator.generateRandomString(6));
+        enlacePago.setNombre(nombre);
         enlacePago.setFechaHoraDesde(fechaHoraDesde);
         enlacePago.setFechaHoraHasta(fechaHoraHasta);
         enlacePago.setActivo(true);
@@ -110,16 +120,18 @@ public class TestDataService {
 
         enlacePagoRepository.save(enlacePago);
 
-        createPlantillaEnlacePago(codigo, plantilla);
+        createPlantillaEnlacePago(codigo, plantilla, vendedor, comprador);
 
         return enlacePago;
     }
 
-    private Transaccion createTransaccion(Producto producto, Double valor) {
+    private Transaccion createTransaccion(Producto producto, Double valor, Boolean exitosa) {
         Transaccion transaccion = new Transaccion();
         transaccion.setProducto(producto);
         transaccion.setValor(valor);
         transaccion.setCodigo(RandomGenerator.generateRandomString(12));
+        transaccion.setExitosa(exitosa);
+
         transaccionRepository.save(transaccion);
         return transaccion;
     }
@@ -139,15 +151,17 @@ public class TestDataService {
         plantilla.setCodigo(codigo);
         plantilla.setCampos(campos);
 
-        // plantillaRepository.save(plantilla);
+        plantillaRepository.save(plantilla);
 
         return plantilla;
     }
 
-    private void createPlantillaEnlacePago(String codigo, Plantilla plantilla){
+    private void createPlantillaEnlacePago(String codigo, Plantilla plantilla, Vendedor vendedor, Plantilla comprador){
         PlantillaEnlacePago plantillaEnlacePago = new PlantillaEnlacePago();
-        plantillaEnlacePago.setCodigo(codigo);
+        plantillaEnlacePago.setCodigoEnlace(codigo);
         plantillaEnlacePago.setPlantilla(plantilla);
+        plantillaEnlacePago.setVendedor(vendedor);
+        plantillaEnlacePago.setComprador(comprador);
 
         plantillaEnlacePagoRepository.save(plantillaEnlacePago);
 
