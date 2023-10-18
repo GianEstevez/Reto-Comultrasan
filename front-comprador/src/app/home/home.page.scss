@@ -1,27 +1,26 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+/* Paleta de colores */
+:root {
+  --apple-green: #93c120;
+  --ghost-white: #f6f7fc;
+  --rich-black: #0d1821;
+  --ebony: #6b654b;
+  --hunter-green: #2a6041;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+
+/* Estilos para elementos utilizando la paleta de colores */
+.element {
+  background-color: var(--apple-green);
+  color: var(--ghost-white);
+  border: 1px solid var(--rich-black);
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.button-pse {
+  background-color: var(--ebony);
+  color: var(--ghost-white);
 }
 
-#container a {
-  text-decoration: none;
+.button-fc {
+  background-color: var(--hunter-green);
+  color: var(--ghost-white);
 }
