@@ -28,20 +28,21 @@ CREATE TABLE IF NOT EXISTS PUBLIC.PRODUCTOS
 ALTER TABLE PUBLIC.PRODUCTOS
     OWNER TO ROOT;
 
-CREATE TABLE IF NOT EXISTS PUBLIC.ENLACES_PAGO
+CREATE TABLE ENLACES_PAGO
 (
-    ID               BIGSERIAL
-        PRIMARY KEY,
+    ID               BIGSERIAL PRIMARY KEY,
     ACTIVO           BOOLEAN DEFAULT TRUE        NOT NULL,
     CODIGO           VARCHAR(255)                NOT NULL
-        CONSTRAINT UK_T9VJF0L2PA74CAYMYI6LB65ET
-            UNIQUE,
+        CONSTRAINT UK_T9VJF0L2PA74CAYMYI6LB65ET UNIQUE,
     FECHA_HORA_DESDE TIMESTAMP(6) WITH TIME ZONE NOT NULL,
     FECHA_HORA_HASTA TIMESTAMP(6) WITH TIME ZONE,
+    URL              VARCHAR(255)                NOT NULL,
     ID_PRODUCTO      BIGINT                      NOT NULL
-        CONSTRAINT FKH8QWXSCAC4JCNTK96E8RCQS4M
-            REFERENCES PUBLIC.PRODUCTOS
+        CONSTRAINT FKH8QWXSCAC4JCNTK96E8RCQS4M REFERENCES PRODUCTOS
 );
+
+ALTER TABLE ENLACES_PAGO
+    OWNER TO ROOT;
 
 ALTER TABLE PUBLIC.ENLACES_PAGO
     OWNER TO ROOT;
@@ -90,9 +91,9 @@ INSERT INTO public.transacciones (id, fecha_hora, valor, id_producto) VALUES (1,
 INSERT INTO public.transacciones (id, fecha_hora, valor, id_producto) VALUES (2, NOW(), 900000, 2);
 INSERT INTO public.transacciones (id, fecha_hora, valor, id_producto) VALUES (3, NOW(), 1000000, 3);
 
-INSERT INTO public.enlaces_pago (id, activo, codigo, id_producto, fecha_hora_desde, fecha_hora_hasta) VALUES (1, TRUE, 'nrxuZt', 2, '2023-10-18 08:56:47.354268 +00:00', '2023-10-18 09:56:47.354269 +00:00');
-INSERT INTO public.enlaces_pago (id, activo, codigo, id_producto, fecha_hora_desde, fecha_hora_hasta) VALUES (2, TRUE, '5XY8Zi', 3, '2023-10-18 08:56:47.356942 +00:00', '2023-10-18 18:56:47.356942 +00:00');
-INSERT INTO public.enlaces_pago (id, activo, codigo, id_producto, fecha_hora_desde, fecha_hora_hasta) VALUES (3, TRUE, 'FYr3tq', 4, '2023-10-18 08:56:47.358435 +00:00', '2023-10-22 12:56:47.358435 +00:00');
+INSERT INTO public.enlaces_pago (url, id, activo, codigo, id_producto, fecha_hora_desde, fecha_hora_hasta) VALUES ('https://localhost:5000/pago/', 1, TRUE, 'nrxuZt', 2, '2023-10-18 08:56:47.354268 +00:00', '2023-10-18 09:56:47.354269 +00:00');
+INSERT INTO public.enlaces_pago (url, id, activo, codigo, id_producto, fecha_hora_desde, fecha_hora_hasta) VALUES ('https://localhost:5000/pago/', 2, TRUE, '5XY8Zi', 3, '2023-10-18 08:56:47.356942 +00:00', '2023-10-18 18:56:47.356942 +00:00');
+INSERT INTO public.enlaces_pago (url, id, activo, codigo, id_producto, fecha_hora_desde, fecha_hora_hasta) VALUES ('https://localhost:5000/pago/', 3, TRUE, 'FYr3tq', 4, '2023-10-18 08:56:47.358435 +00:00', '2023-10-22 12:56:47.358435 +00:00');
 
 INSERT INTO public.transacciones_enlace (id, id_enlace, id_transaccion, huella, ip) VALUES (1, 1, 1, 'fingerprint1', '192.168.1.1');
 INSERT INTO public.transacciones_enlace (id, id_enlace, id_transaccion, huella, ip) VALUES (2, 2, 2, 'fingerprint2', '192.168.1.2');

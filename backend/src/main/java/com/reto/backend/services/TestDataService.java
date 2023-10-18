@@ -68,6 +68,7 @@ public class TestDataService {
         enlacePago.setFechaHoraDesde(fechaHoraDesde);
         enlacePago.setFechaHoraHasta(fechaHoraHasta);
         enlacePago.setActivo(true);
+        enlacePago.setUrl("https://localhost:5000/pago/");
         enlacePagoRepository.save(enlacePago);
         return enlacePago;
     }

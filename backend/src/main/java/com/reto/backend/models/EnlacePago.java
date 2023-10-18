@@ -19,6 +19,9 @@ public class EnlacePago {
     @Column(unique = true, nullable = false)
     private String codigo;
 
+    @Column(nullable = false)
+    private String url;
+
     @ManyToOne
     @JoinColumn(name="id_producto", nullable = false)
     private Producto producto;

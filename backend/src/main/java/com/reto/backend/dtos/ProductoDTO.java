@@ -10,5 +10,5 @@ import java.io.Serializable;
  */
 // @AllArgsConstructor
 // @Getter
-public record ProductoDTO(String nombre, String codigo, Double saldo) implements Serializable {
+public record ProductoDTO(String tipo_cuenta, String numero_cuenta, Double saldo) implements Serializable {
 }
