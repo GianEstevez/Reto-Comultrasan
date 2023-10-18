@@ -1,4 +1,4 @@
-package com.reto.backend.models;
+package com.reto.backend.postgresql.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,6 +15,9 @@ public class Transaccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true, nullable = false)
+    private String codigo;
 
     @ManyToOne
     @JoinColumn(name="id_producto")

@@ -1,4 +1,4 @@
-package com.reto.backend.models;
+package com.reto.backend.postgresql.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -20,6 +20,9 @@ public class EnlacePago {
     private String codigo;
 
     @Column(nullable = false)
+    private String nombre;
+
+    @Column(nullable = false)
     private String url;
 
     @ManyToOne
@@ -34,4 +37,7 @@ public class EnlacePago {
 
     @Column(columnDefinition = "boolean default true", nullable = false)
     private Boolean activo;
+
+    @Column
+    private byte[] imagen;
 }

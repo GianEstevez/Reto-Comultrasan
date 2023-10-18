@@ -5,5 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: postgresql-reto
     ports:
       - "5432:5432"

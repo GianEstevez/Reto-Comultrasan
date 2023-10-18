@@ -1,9 +1,11 @@
 package com.reto.backend.dtos;
 
+import com.reto.backend.postgresql.models.Producto;
+
 import java.io.Serializable;
 
 /**
- * DTO for {@link com.reto.backend.models.Producto}
+ * DTO for {@link Producto}
  */
 // @AllArgsConstructor
 // @Getter

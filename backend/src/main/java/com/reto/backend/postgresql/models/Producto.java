@@ -1,6 +1,6 @@
-package com.reto.backend.models;
+package com.reto.backend.postgresql.models;
 
-import com.reto.backend.repositories.ProductoRepository;
+import com.reto.backend.postgresql.repositories.ProductoRepository;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +22,7 @@ public class Producto {
     @Column(nullable = false)
     private String nombre;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String codigo;
 
     @Transient

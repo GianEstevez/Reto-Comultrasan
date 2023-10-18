@@ -3,8 +3,8 @@ package com.reto.backend.services;
 
 import java.time.Instant;
 
-import com.reto.backend.models.*;
-import com.reto.backend.repositories.*;
+import com.reto.backend.postgresql.models.*;
+import com.reto.backend.postgresql.repositories.*;
 import com.reto.backend.utils.RandomGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,6 +65,7 @@ public class TestDataService {
         EnlacePago enlacePago = new EnlacePago();
         enlacePago.setProducto(producto);
         enlacePago.setCodigo(RandomGenerator.generateRandomString(6));
+        enlacePago.setNombre("Enlace de pago" + RandomGenerator.generateRandomString(6));
         enlacePago.setFechaHoraDesde(fechaHoraDesde);
         enlacePago.setFechaHoraHasta(fechaHoraHasta);
         enlacePago.setActivo(true);
@@ -77,6 +78,7 @@ public class TestDataService {
         Transaccion transaccion = new Transaccion();
         transaccion.setProducto(producto);
         transaccion.setValor(valor);
+        transaccion.setCodigo(RandomGenerator.generateRandomString(12));
         transaccionRepository.save(transaccion);
         return transaccion;
     }

@@ -1,20 +1,17 @@
 package com.reto.backend.controllers;
 
+import com.reto.backend.dtos.EnlaceDTO;
 import com.reto.backend.dtos.ProductoDTO;
-import com.reto.backend.dtos.UserDataDTO;
 import com.reto.backend.services.ProductService;
 import com.reto.backend.services.TestDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/productos")
 public class ProductController {
 
     @Autowired
@@ -24,14 +21,21 @@ public class ProductController {
     TestDataService testDataService;
 
     @GetMapping
-    public ResponseEntity<List<ProductoDTO>> generateHTML(@RequestBody UserDataDTO userDataDTO){
+    public ResponseEntity<List<ProductoDTO>> getProductos(@RequestHeader("idUsuario") Long userId){
 
         // Return 200 OK
-        return ResponseEntity.ok(productService.getProductosFromIdUsuario(userDataDTO.userId()));
+        return ResponseEntity.ok(productService.getProductosFromIdUsuario(userId));
+    }
+
+    @GetMapping("enlacesPago")
+    public ResponseEntity<List<EnlaceDTO>> getEnlacesPago(@RequestHeader("codigoProducto") String codigoProducto){
+
+        // Return 200 OK
+        return ResponseEntity.ok(productService.getEnlacesPagoFromCodigoProducto(codigoProducto));
     }
 
     @GetMapping("createTestData")
-    public ResponseEntity<String> generateHTML(){
+    public ResponseEntity<String> createTestData(){
 
         testDataService.initializeTestData();
 
