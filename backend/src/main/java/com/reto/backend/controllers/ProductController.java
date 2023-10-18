@@ -21,14 +21,14 @@ public class ProductController {
     TestDataService testDataService;
 
     @GetMapping
-    public ResponseEntity<List<ProductoDTO>> getProductos(@RequestHeader("idUsuario") Long userId){
+    public ResponseEntity<List<ProductoDTO>> getProductos(@RequestParam("idUsuario") Long userId){
 
         // Return 200 OK
         return ResponseEntity.ok(productService.getProductosFromIdUsuario(userId));
     }
 
     @GetMapping("enlacesPago")
-    public ResponseEntity<List<EnlaceDTO>> getEnlacesPago(@RequestHeader("codigoProducto") String codigoProducto){
+    public ResponseEntity<List<EnlaceDTO>> getEnlacesPago(@RequestParam("codigoProducto") String codigoProducto){
 
         // Return 200 OK
         return ResponseEntity.ok(productService.getEnlacesPagoFromCodigoProducto(codigoProducto));
