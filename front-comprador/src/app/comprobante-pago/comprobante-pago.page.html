@@ -1,18 +1,29 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Comprobante de Pago</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true" scrollY="false">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="header">
+    <div class="texts">
+      <p style="font-weight: 500;" class="main--text"> Comprobante de pago</p>
+    </div>
+  </div>
+
   <!-- Logo -->
-  <div class="logo-container">
-    <img src="\..\..\assets\img\logofc.png" alt="Logo" style="position: inherit;height: 100px;">
+  <div class="bottom--header">
+  <div class="logo-container" >
+    <div style="text-align: center;">
+      <img src="\..\..\assets\img\logofc.png" alt="Logo" style="height: 100px; display:bloc">
+      <p class="main--text"> Financiera Comultrasan </p>
+    </div>
   </div>
 
   <!-- Información de Transacción -->
-  <ion-card>
-    <ion-card-header>
+  <ion-card style="background-color: #8c8c8c;">
+    <ion-card-header style="color: black;">
       Información de Transacción
     </ion-card-header>
     <ion-card-content>
@@ -22,22 +33,16 @@
   </ion-card>
 
   <!-- Detalles -->
-  <ion-card>
-    <ion-card-header>
+  <ion-card style="background-color: #8c8c8c;">
+    <ion-card-header style="color: black;">
       Detalles
     </ion-card-header>
     <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <ion-label>Monto</ion-label>
-          <ion-label>$100.00</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Descripción</ion-label>
-          <ion-label>Descripción de los productos/servicios adquiridos.</ion-label>
-        </ion-item>
-        <!-- Agrega más detalles si es necesario -->
-      </ion-list>
+        <div class="label" style="background-color: #8c8c8c; color: black;">Monto:</div>
+        <div class="label">$100.00</div>
+        <div class="label">Descripción:</div>
+        <div class="label">Descripción de los productos/servicios adquiridos.</div>
+      <!-- Agrega más detalles si es necesario -->
     </ion-card-content>
+    
   </ion-card>
-</ion-content>

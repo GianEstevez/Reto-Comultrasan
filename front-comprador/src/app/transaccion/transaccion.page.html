@@ -1,19 +1,12 @@
-<ion-content class="ion-text-center">
-  <h2>Resultado de la Transacción</h2>
-  <ion-card>
-    <ion-card-content>
-      <ng-container *ngIf="esTransaccionExitosa; else transaccionRechazada">
-        <ion-icon name="checkmark-circle" size="large" color="success"></ion-icon>
-        <p>¡Transacción Exitosa!</p>
-        <p>Gracias por tu pago.</p>
-        <ion-button expand="full" (click)="irAImprimirComprobante()">Imprimir Comprobante</ion-button>
-      </ng-container>
-      <ng-template #transaccionRechazada>
-        <ion-icon name="close-circle" size="large" color="danger"></ion-icon>
-        <p>Transacción Rechazada</p>
-        <p>Intenta mas tarde.</p>
-        <ion-button expand="full" (click)="irAImprimirComprobante()">Imprimir Comprobante</ion-button>
-      </ng-template>
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+<ion-content style="background-color: antiquewhite;" class="ion-text-center" [fullscreen]="true" scrollY="false">
+  <div class="header">
+    <div class="texts">
+      <p style="font-weight: 500;" class="main--text"> Resultado de la Transacción</p>
+    </div>
+  </div>
+  <div class="bottom--header">
+    <ion-icon  name="checkmark-circle" size="large"></ion-icon>
+      <p>¡Transacción Exitosa!</p>
+      <p>Gracias por tu pago.</p>
+      <ion-button expand="full" (click)="irAImprimirComprobante()">Imprimir Comprobante</ion-button>
+  </div>
