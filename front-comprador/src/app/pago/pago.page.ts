@@ -13,7 +13,7 @@ export class PagoPage implements OnInit {
   compradorData: any;
   codigoParam: any;
   productosData: any;
-  fingerprintData: string = '';
+  fingerprintData: any = [];
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -45,35 +45,12 @@ export class PagoPage implements OnInit {
         const longitud = position.coords.longitude;
         console.log('Ubicación actual (latitud, longitud):', latitud, longitud);
 
-        // Enviar datos al backend
-        this.enviarDatosAlBackend(fechaHora, tipoDispositivo, latitud, longitud);
+        this.fingerprintData = [fechaHora, tipoDispositivo, latitud, longitud];
       });
     } else {
       console.log('El navegador no admite la geolocalización.');
+      this.fingerprintData = [fechaHora, tipoDispositivo];
     }
-
-  }
-
-  enviarDatosAlBackend(fechaHora: any, tipoDispositivo: any, latitud: any, longitud: any) {
-    // Definir la URL del backend
-    const url = 'https://tu-servidor-backend.com/tu-endpoint';
-
-    // Datos a enviar al backend
-    const fingerprint = { fechaHora,
-      tipoDispositivo,
-      latitud,
-      longitud,
-    };
-
-    // Realiza una solicitud POST al servidor con los datos
-    //this.http.post(url, fingerprint).subscribe(
-    //  (respuesta) => {
-    //    console.log('Datos enviados al backend:', respuesta);
-    //  },
-    //  (error) => {
-    //    console.error('Error al enviar datos al backend:', error);
-    //  }
-    //);
   }
 
   onSubmit() {
