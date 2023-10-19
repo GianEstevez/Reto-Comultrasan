@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  mongodb:
+    build:
+      context: ./db/mongo
+    ports:
+      - "27017:27017" # Expose MongoDB port
+    # volumes:
+      # - ./db/mongo:/data/db # Mount local directory to store MongoDB data
+
+  postgresql:
+    build:
+      context: ./db/sql
+    ports:
+      - "5432:5432" # Expose PostgreSQL port
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: reto_comultrasan
+    # volumes:
+      # - ./db/sql:/var/lib/postgresql/data # Mount local directory to store PostgreSQL data
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8080:8080" # Expose your backend application's port
+    depends_on:
+      - mongodb
+      - postgresql
+    environment:
+      MONGODB_HOST: mongodb
+      MONGODB_PORT: 27017
+      POSTGRES_HOST: postgresql
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: reto_comultrasan
+    # Add any other environment variables your backend application requires

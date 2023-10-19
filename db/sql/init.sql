@@ -1,18 +1,18 @@
-CREATE TABLE IF NOT EXISTS PUBLIC.USUARIOS
-(
-    ID                  BIGSERIAL
-        PRIMARY KEY,
-    CORREO              VARCHAR(255) NOT NULL,
-    LIMITE_ENLACES_PAGO BIGINT       NOT NULL,
-    NUMERO_TELEFONO     VARCHAR(255) NOT NULL,
-    PRIMER_APELLIDO     VARCHAR(255) NOT NULL,
-    PRIMER_NOMBRE       VARCHAR(255) NOT NULL,
-    SEGUNDO_APELLIDO    VARCHAR(255),
-    SEGUNDO_NOMBRE      VARCHAR(255)
-);
+-- CREATE TABLE IF NOT EXISTS PUBLIC.USUARIOS
+-- (
+--     ID                  BIGSERIAL
+--         PRIMARY KEY,
+--     CORREO              VARCHAR(255) NOT NULL,
+--     LIMITE_ENLACES_PAGO BIGINT       NOT NULL,
+--     NUMERO_TELEFONO     VARCHAR(255) NOT NULL,
+--     PRIMER_APELLIDO     VARCHAR(255) NOT NULL,
+--     PRIMER_NOMBRE       VARCHAR(255) NOT NULL,
+--     SEGUNDO_APELLIDO    VARCHAR(255),
+--     SEGUNDO_NOMBRE      VARCHAR(255)
+-- );
 
-ALTER TABLE PUBLIC.USUARIOS
-    OWNER TO ROOT;
+-- ALTER TABLE PUBLIC.USUARIOS
+--     OWNER TO ROOT;
 
 -- CREATE TABLE IF NOT EXISTS PUBLIC.PRODUCTOS
 -- (
@@ -78,9 +78,9 @@ ALTER TABLE PUBLIC.USUARIOS
 -- ALTER TABLE PUBLIC.TRANSACCIONES_ENLACE
 --     OWNER TO ROOT;
 
-INSERT INTO public.usuarios (id, correo, limite_enlaces_pago, numero_telefono, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre) VALUES (1, 'yuri@gmail.com', 0, '3102829322', 'estevez', 'yuri', 'ruiz', 'melissa');
-INSERT INTO public.usuarios (id, correo, limite_enlaces_pago, numero_telefono, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre) VALUES (2, 'edward@gmail.com', 4, '3102829322', 'parada', 'edward', 'silva', 'javier');
-INSERT INTO public.usuarios (id, correo, limite_enlaces_pago, numero_telefono, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre) VALUES (3, 'gian@gmail.com', 1, '3102829322', 'estevez', 'gianfranco', 'ruiz', null);
+-- INSERT INTO public.usuarios (id, correo, limite_enlaces_pago, numero_telefono, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre) VALUES (1, 'yuri@gmail.com', 0, '3102829322', 'estevez', 'yuri', 'ruiz', 'melissa');
+-- INSERT INTO public.usuarios (id, correo, limite_enlaces_pago, numero_telefono, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre) VALUES (2, 'edward@gmail.com', 4, '3102829322', 'parada', 'edward', 'silva', 'javier');
+-- INSERT INTO public.usuarios (id, correo, limite_enlaces_pago, numero_telefono, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre) VALUES (3, 'gian@gmail.com', 1, '3102829322', 'estevez', 'gianfranco', 'ruiz', null);
 
 -- INSERT INTO public.productos (id, codigo, nombre, id_usuario) VALUES (1, 'COD1', 'Cuenta de Ahorros',  1);
 -- INSERT INTO public.productos (id, codigo, nombre, id_usuario) VALUES (2, 'COD2', 'Cuenta de Ahorros Amiga',  2);

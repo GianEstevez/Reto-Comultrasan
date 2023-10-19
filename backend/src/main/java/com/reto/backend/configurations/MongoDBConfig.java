@@ -22,9 +22,15 @@ public class MongoDBConfig {
     @Value("${spring.data.mongodb.database}")
     private String database;
 
+    @Value("${spring.data.mongodb.username}")
+    private String username;
+
+    @Value("${spring.data.mongodb.password}")
+    private String password;
+
     @Bean
     public MongoTemplate mongoTemplate() {
-        String connectionString = "mongodb://gamma:1234@" + host + ":" + port + "/" + database;
+        String connectionString = "mongodb://" + username + ":" + password + "@" + host + ":" + port + "/" + database;
 
         return new MongoTemplate(new SimpleMongoClientDatabaseFactory(connectionString));
     }
