@@ -34,7 +34,6 @@ export class EnlacesPage implements OnInit {
     this.apiService.getProductos(idUsuario).subscribe(
       (data) => {
         this.productosData = data;  // Guardamos la respuesta en la variable productosData
-
         const cuentaEspecifica = this.productosData.productos.find((producto: any) => producto.numero_cuenta === this.id);
 
         if (cuentaEspecifica) {
@@ -94,7 +93,7 @@ export class EnlacesPage implements OnInit {
   }
 
   goToQR(codigo: string, nombre: string) {
-    this.router.navigate(['/qr', codigo, nombre]);  // Utiliza el número de cuenta como parte de la URL
+    this.router.navigate(['/qr', codigo, nombre, this.id]);  // Utiliza el número de cuenta como parte de la URL
   }
   
   volverAtras(): void {

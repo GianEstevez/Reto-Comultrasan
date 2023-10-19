@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { mockCampos } from 'src/app/mocks/mockCampos'
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PlantillaService } from '../services/plantilla.service';
 @Component({
   selector: 'app-pago',
   templateUrl: './pago.page.html',
@@ -8,12 +9,29 @@ import { Router } from '@angular/router';
 })
 export class PagoPage implements OnInit {
   mockCampos = mockCampos;
-  negocioData: any = mockCampos.plantilla;
-  compradorData: any = mockCampos.comprador;
+  negocioData: any;
+  compradorData: any;
+  codigoParam: any;
+  productosData: any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private plantillaService: PlantillaService) {
+      this.codigoParam = this.route.snapshot.params['codigo'];
+   }
 
   ngOnInit() {
+    this.plantillaService.getPlantilla(this.codigoParam).subscribe(
+      (data) => {
+        this.productosData = data;  // Guardamos la respuesta en la variable productosData
+        this.negocioData = this.productosData.plantilla;
+        this.compradorData = this.productosData.comprador;
+        console.log(this.productosData);  // Imprime la respuesta aquí
+      },
+      (error) => {
+        console.error('Error al obtener productos:', error);
+      }
+    );
   }
 
   onSubmit() {

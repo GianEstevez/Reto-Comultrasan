@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./enlaces/enlaces.module').then( m => m.EnlacesPageModule)
   },
   {
-    path: 'qr/:codigoenlace/:enlacenombre',
+    path: 'qr/:codigoenlace/:enlacenombre/:cuenta',
     loadChildren: () => import('./qr/qr.module').then( m => m.QrPageModule)
   },
 ];

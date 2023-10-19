@@ -18,10 +18,11 @@
       <p> </p>
     </div>
     <div class="saldo">
-      <p> Comparte tu QR: </p> 
+      <p>  Copia el enlace de pago tocando código QR </p> 
       <div style="display: flex; justify-content: center; padding-top: 20px">
         <div *ngIf="qrCodeUrl">
-          <img style="border-radius: 25px;" [src]="qrCodeUrl" alt="Código QR">
+          <img (click)="copiarAlPortapapeles('http://localhost:8100/pago/' + codigoEnlace)"
+            style="border-radius: 25px;" [src]="qrCodeUrl" alt="Código QR">
         </div>
       </div>
     </div>

@@ -20,8 +20,8 @@
       <img src="../../assets/img/chad.jpg" alt="Logo" width="100px" height="100px" style="border-radius: 50%;">
     </div>
     <form (ngSubmit)="onSubmit()">
-      <ion-item *ngIf="mockCampos?.plantilla">
-        <ion-item *ngFor="let campo of mockCampos?.plantilla?.campos" >
+      <ion-item *ngIf="productosData?.plantilla">
+        <ion-item *ngFor="let campo of productosData?.plantilla?.campos" >
           <ion-label position="floating">{{ campo?.nombre }}</ion-label>
           <ion-input
             pattern="{{ campo?.regex }}"
@@ -39,8 +39,8 @@
       <ion-label>Información del pagador</ion-label>
     </ion-item-divider>
     <form (ngSubmit)="onSubmitComprador()">
-      <ng-container *ngIf="mockCampos?.comprador">
-        <ion-item *ngFor="let campo of mockCampos?.comprador?.campos">
+      <ng-container *ngIf="productosData?.comprador">
+        <ion-item *ngFor="let campo of productosData?.comprador?.campos">
           <ion-label position="floating">{{ campo?.nombre }}</ion-label>
           <ion-input
             pattern="{{ campo?.regex }}"

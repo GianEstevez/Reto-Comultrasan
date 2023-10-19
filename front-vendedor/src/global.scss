@@ -56,3 +56,12 @@ ion-content {
     opacity: 0;
   }
   
+
+.toast-message {
+  background-color: #830d0d !important;
+}
+
+/* Cambia el color del texto del Snackbar a rojo */
+.toast-message {
+  color: red !important;
+}

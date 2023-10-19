@@ -36,16 +36,16 @@
   </div>
   <div class="bottom--header">
     
-    <p class="main--text">En este módulo encontrarás los enlaces a tus pagos.</p>
+    <p class="main--text">En este módulo encontrarás los enlaces a tus pagos ligados a esta cuenta de ahorros.</p>
 
-    <div class="main--content" *ngFor="let enlace of enlacesData">
-        <div class="enlaces">
-          <div (click)="goToQR(enlace.codigo, enlace.nombre)" class="item">
+    <div class="main--content" *ngFor="let enlace of enlacesData?.enlaces">
+        <div (click)="goToQR(enlace.codigo, enlace.nombre)" class="enlaces">
+          <div class="item">
             <p> {{ enlace.nombre }} </p>
           </div>
           <div>
-             <button (click)="copiarAlPortapapeles(enlace.url + enlace.codigo)" class="boton-copiar">
-            <ion-icon name="copy-outline"></ion-icon>
+             <button class="boton-copiar">
+              <ion-icon style="color: #0D1821;" name="chevron-forward-outline"></ion-icon>
           </button> 
           </div>
         </div>
