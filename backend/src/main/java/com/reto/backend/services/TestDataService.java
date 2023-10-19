@@ -195,6 +195,7 @@ public class TestDataService {
 
         plantillaEnlacePago.setValor(transaccion.getValor());
         plantillaEnlacePago.setCodigoTransaccion(transaccion.getCodigo());
+        plantillaEnlacePago.getComprador().setNombre("Nicolas Mendez");
 
         plantillaEnlacePagoRepository.save(plantillaEnlacePago);
         comprobanteRepository.save(comprobante);
