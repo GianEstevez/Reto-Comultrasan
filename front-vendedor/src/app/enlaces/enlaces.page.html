@@ -41,7 +41,7 @@
     <div class="main--content" *ngFor="let enlace of enlacesData?.enlaces">
         <div (click)="goToQR(enlace.codigo, enlace.nombre)" class="enlaces">
           <div class="item">
-            <p> {{ enlace.nombre }} </p>
+            <p style="font-weight: 500;"> {{ enlace.nombre }} </p>
           </div>
           <div>
              <button class="boton-copiar">
