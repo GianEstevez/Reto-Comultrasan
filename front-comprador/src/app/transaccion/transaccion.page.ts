@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { PlantillaService } from '../services/plantilla.service';
 @Component({
   selector: 'app-transaccion',
   templateUrl: './transaccion.page.html',
@@ -8,19 +8,16 @@ import { Router } from '@angular/router';
 })
 export class TransaccionPage implements OnInit {
 
-  esTransaccionExitosa: boolean;
+  codigoParam: any;
 
-  constructor(private router: Router) {
-    // Generar un número aleatorio (0 o 1)
-    const numeroAleatorio = Math.floor(Math.random() * 2);
-
-    // Determinar el resultado de la transacción basado en el número aleatorio
-    this.esTransaccionExitosa = numeroAleatorio === 0;
-  }
+  constructor(private router: Router,
+    private route: ActivatedRoute) {
+      this.codigoParam = this.route.snapshot.params['codigo'];
+   }
 
   irAImprimirComprobante() {
     // Redirigir a la página de comprobante-pago.html
-    this.router.navigate(['/comprobante-pago']);
+    this.router.navigate(['/comprobante-pago/'+this.codigoParam]);
   }
 
   ngOnInit() {
