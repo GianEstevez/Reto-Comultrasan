@@ -2,6 +2,7 @@ version: '3'
 
 services:
   mongodb:
+    image: mongodb-reto
     build:
       context: ./db/mongo
     ports:
@@ -10,6 +11,7 @@ services:
       # - ./db/mongo:/data/db # Mount local directory to store MongoDB data
 
   postgresql:
+    image: postgresql-reto
     build:
       context: ./db/sql
     ports:
@@ -22,6 +24,7 @@ services:
       # - ./db/sql:/var/lib/postgresql/data # Mount local directory to store PostgreSQL data
 
   backend:
+    image: springboot-reto
     build:
       context: ./backend
     ports:
