@@ -92,7 +92,7 @@ public class TestDataService {
 
         for (Integer i = 5; i < 20; i++) {
             Transaccion transaccionActual = createTransaccion(producto2, Math.random() * 10000d + 1000d, true);
-            createTransaccionEnlace(enlace1, transaccionActual, "192.168.1."+ i.toString(), RandomGenerator.generateRandomString(30));
+            createTransaccionEnlace(enlace1, transaccionActual, "192.168.1."+ i, RandomGenerator.generateRandomString(30));
             createComprobante(transaccionActual, par1.getSecond());
         }
 
