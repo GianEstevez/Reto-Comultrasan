@@ -1,63 +1,62 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>PasarelaPagos</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" scrollY="false">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">PasarelaPagos</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <!-- Sección del negocio -->
-  <ion-list>
-    <ion-item-divider>
-      <ion-label>Información del negocio</ion-label>
-    </ion-item-divider>
-    <div style="text-align: center; margin-top: 20px;">
-      <img src="../../assets/img/chad.jpg" alt="Logo" width="100px" height="100px" style="border-radius: 50%;">
+  <div class="head">
+    <div class="text">
+      <p style="font-weight: 500;" class="main--text"> Pasarela de pagos </p>
     </div>
-    <form (ngSubmit)="onSubmit()">
-      <ion-item *ngIf="productosData?.plantilla">
-        <ion-item *ngFor="let campo of productosData?.plantilla?.campos" >
-          <ion-label position="floating">{{ campo?.nombre }}</ion-label>
-          <ion-input
-            pattern="{{ campo?.regex }}"
-            value="{{ campo?.contenido }}"
-            disabled
-          ></ion-input>
-        </ion-item>
-      </ion-item>
-    </form>
-  </ion-list>
+  </div>
 
-  <!-- Sección de campos básicos del pagador -->
   <ion-list>
-    <ion-item-divider>
-      <ion-label>Información del pagador</ion-label>
-    </ion-item-divider>
-    <form (ngSubmit)="onSubmitComprador()">
-      <ng-container *ngIf="productosData?.comprador">
-        <ion-item *ngFor="let campo of productosData?.comprador?.campos">
-          <ion-label position="floating">{{ campo?.nombre }}</ion-label>
-          <ion-input
-            pattern="{{ campo?.regex }}"
-            value="{{ campo?.contenido }}"
-          ></ion-input>
-        </ion-item>
-      </ng-container>
+    <div class="ion-text-center ion-padding-top">
+      <img src="../../assets/img/chad.jpg" alt="Logo" class="business-logo"> <!-- Aplicamos estilos a la imagen -->
+    </div>
 
+    <div class="bottom--header">
+      <p class="main--text"> Informacion del negocio </p>
+
+    <form (ngSubmit)="onSubmit()">
+      <ng-container  *ngIf="mockCampos?.plantilla" >
+        <ng-container *ngFor="let campo of mockCampos?.plantilla?.campos">
+          <ion-label  position="floating" style="margin: 12px;">{{ campo?.nombre }}</ion-label> 
+            <input class="input"
+              matInput
+              [pattern]="campo?.regex"
+              [value]="campo?.contenido"
+              [disabled]="true"
+            /><br><br>
+        </ng-container>
+      </ng-container>
     </form>
+    
+    <p class="main--text"> Informacion del comprador </p>
+    <form (ngSubmit)="onSubmitComprador()">
+      <ng-container *ngIf="mockCampos?.comprador">
+        <ng-container *ngFor="let campo of mockCampos?.comprador?.campos">
+          <ion-label  position="floating">{{ campo?.nombre }}</ion-label><br>
+            <input style="background-color:rgb(207, 207, 207);"
+              matInput
+              [pattern]="campo?.regex"
+              [value]="campo?.contenido"
+            /><br><br>
+        </ng-container>
+      </ng-container>
+    </form>
+    </div>
   </ion-list>
 
   <ion-row>
-    <ion-col size="6">
-      <ion-button expand="full" (click)="procesarPago('PSE')">PSE</ion-button>
+    <ion-col  size="6">
+      <ion-button color="primary" expand="full" (click)="procesarPago('PSE')">PSE</ion-button>
     </ion-col>
     <ion-col size="6">
-      <ion-button expand="full" (click)="procesarPago('FC')">FC</ion-button>
+      <ion-button color="success" expand="full" (click)="procesarPago('FC')">Financiera <br>Comultrasan</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>
+
+
+
+
+
+ 
