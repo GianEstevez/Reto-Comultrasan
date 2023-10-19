@@ -14,6 +14,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
     Producto getProductoByCodigo(String codigo);
 
-    @Query("SELECT SUM(t.valor) FROM Transaccion t WHERE t.producto = :producto")
+    @Query("SELECT SUM(t.valor) FROM Transaccion t WHERE t.producto = :producto AND t.exitosa = true")
     Double calculateSaldo(@Param("producto") Producto producto);
 }

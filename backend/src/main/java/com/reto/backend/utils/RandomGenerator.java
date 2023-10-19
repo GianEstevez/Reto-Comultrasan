@@ -1,18 +1,20 @@
 package com.reto.backend.utils;
 
-import java.security.SecureRandom;
+import java.util.Random;
 
 public class RandomGenerator {
 
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    private static final SecureRandom secureRandom = new SecureRandom();
+    private static final long SEED = 42; // Choose any seed value
 
-    private RandomGenerator(){}
+    private static final Random random = new Random(SEED);
+
+    private RandomGenerator() {}
 
     public static String generateRandomString(int length) {
         StringBuilder randomString = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
-            int randomIndex = secureRandom.nextInt(CHARACTERS.length());
+            int randomIndex = random.nextInt(CHARACTERS.length());
             char randomChar = CHARACTERS.charAt(randomIndex);
             randomString.append(randomChar);
         }
