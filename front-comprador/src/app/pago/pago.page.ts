@@ -54,7 +54,7 @@ export class PagoPage implements OnInit {
   }
 
   onSubmit() {
-    // Aquí puedes enviar this.formData al backend
+    // Lógica para mostrar los datos del vendedor
     console.log(this.negocioData);
   }
 
@@ -71,7 +71,7 @@ export class PagoPage implements OnInit {
   
       // Después de 10 segundos, redirigir a otra página en la aplicación
       setTimeout(() => {
-        this.router.navigate(['/transaccion']);
+        this.router.navigate(['/transaccion/'+this.codigoParam]);
       }, 3000); // 10 segundos en milisegundos
     } else if (tipo === 'FC') {
       // Realizar la redirección para 'FC' de manera similar
@@ -80,7 +80,7 @@ export class PagoPage implements OnInit {
   
       // Después de 10 segundos, redirigir a otra página en la aplicación
       setTimeout(() => {
-        this.router.navigate(['/transaccion']);
+        this.router.navigate(['/transaccion/'+this.codigoParam]);
       }, 3000); // 10 segundos en milisegundos
     }
   }

@@ -16,11 +16,11 @@ const routes: Routes = [
     loadChildren: () => import('./pasarela-pagos/pasarela-pagos.module').then( m => m.PasarelaPagosPageModule)
   },
   {
-    path: 'transaccion',
+    path: 'transaccion/:codigo',
     loadChildren: () => import('./transaccion/transaccion.module').then( m => m.TransaccionPageModule)
   },
   {
-    path: 'comprobante-pago',
+    path: 'comprobante-pago/:codigo',
     loadChildren: () => import('./comprobante-pago/comprobante-pago.module').then( m => m.ComprobantePagoPageModule)
   },
   {
