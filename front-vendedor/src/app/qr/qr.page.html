@@ -29,5 +29,33 @@
 
   </div>
 
+  <div class="bottom--header">
+    <div style="display: flex; justify-content: center; padding-top: 20px; padding-bottom: 20px; font-weight: 500;">
+     <p style="font-size: 18px;">Movimientos</p>
+    </div>
+    <div *ngIf="transaccionesData?.length === 0;">
+      <div style="    display: flex;
+      justify-content: center;
+      padding-top: 120px;">
+         <p>No tiene movimientos</p>
+      </div>
+    </div>
+      <ion-list style="padding-top: 0px;">
+        <ion-item style="    border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;" *ngFor="let transaccion of transaccionesData">
+          <div style="padding-left: 14px;     font-size: 18px;" class="inicio">
+            <p style="    padding-top: 14px;
+            padding-bottom: 4px;     font-weight: 600;">06 de Octubre</p>
+            <ion-label style="    padding-bottom: 14px;">{{ transaccion.plantillaEnlacePago.comprador.nombre }}</ion-label>
+          </div>
+          <div class="final" style="margin-left: auto; display: flex; font-size: 18px;">
+            <ion-label>{{ (transaccion.plantillaEnlacePago.valor).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</ion-label>
+            <ion-icon style="padding-left: 20px; padding-right: 16px;" name="chevron-forward-outline"></ion-icon>
+          </div>
+
+        </ion-item>
+      </ion-list>
+    
+  </div>
 
 </ion-content>

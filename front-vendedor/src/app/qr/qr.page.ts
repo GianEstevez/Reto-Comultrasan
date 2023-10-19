@@ -33,7 +33,7 @@ export class QrPage implements OnInit {
   ngOnInit() {
     this.generateQRCodeWithIcon();
 
-    this.transaccionesService.obtenerInformacion('Gpi2C7').subscribe(data => {
+    this.transaccionesService.obtenerInformacion(this.codigoEnlace).subscribe(data => {
       this.transaccionesData = data;
       console.log(this.transaccionesData);
     });
