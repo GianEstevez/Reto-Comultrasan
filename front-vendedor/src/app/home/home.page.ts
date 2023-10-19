@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from 'src/services/products/products.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',

@@ -4,8 +4,7 @@ import * as QRCode from 'qrcode';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-
-
+import { TransaccionesService } from 'src/services/transacciones/transacciones.service';
 
 @Component({
   selector: 'app-qr',
@@ -18,12 +17,14 @@ export class QrPage implements OnInit {
   enlaceNombreVar: any;
   codigoEnlace: any;
   urlQR: any;
+  transaccionesData: any;
 
 
   constructor(private sanitizer: DomSanitizer,
     private location: Location,
     private route: ActivatedRoute,
-    private toastController: ToastController) {
+    private toastController: ToastController,
+    private transaccionesService: TransaccionesService) {
       this.enlaceNombreVar = this.route.snapshot.params['enlacenombre'];
       this.codigoEnlace = this.route.snapshot.params['codigoenlace'];
 
@@ -31,7 +32,15 @@ export class QrPage implements OnInit {
 
   ngOnInit() {
     this.generateQRCodeWithIcon();
+
+    this.transaccionesService.obtenerInformacion('Gpi2C7').subscribe(data => {
+      this.transaccionesData = data;
+      console.log(this.transaccionesData);
+    });
+
   }
+
+
 
   
   generateQRCodeWithIcon(): void {

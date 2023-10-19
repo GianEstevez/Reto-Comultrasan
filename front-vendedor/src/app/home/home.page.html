@@ -33,9 +33,11 @@
           <p style="padding-top: 24px;"> Disponible:</p>
           <p style="font-size: 25px;">
             <span (click)="toggleMostrarSaldo(i)">
-              $ {{ mostrarSaldo[i] ? producto.saldo.toLocaleString('es-ES') : '***' }}
+              $ {{ mostrarSaldo[i] ? (producto.saldo - producto.saldo % 1).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '***' }}
             </span>
           </p>
+          
+          
           <div>
            <p class="pay--text" style="padding-top: 60px;" (click)="goToProduct(producto.numero_cuenta)" >Pagos ></p>
           </div>
