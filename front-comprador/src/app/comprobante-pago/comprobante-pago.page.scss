@@ -76,6 +76,7 @@
   }
   
   .bottom--header {
+    padding-top: 30px;
     height: 100%;
     background: white;
     width: 100%;
@@ -87,7 +88,8 @@
     .main--text{
       padding-top: 34px;
       padding-bottom: 14px;
-      padding-left: 24px;
+      padding-left: auto;
+      align-items: center;
     }
   
     .scroll-container {
