@@ -1,0 +1,75 @@
+.header {
+    height: 120px;
+    background: #2A6041;
+    width: 100%;
+    .texts{
+      padding-top: 40px;
+      padding-left: 20px;
+      .main--text{
+        margin: 0;
+        font-size: 30px;
+      }
+      .secondary--text{
+        margin: 0;
+        font-size: 18px;
+      }
+    }
+  }
+
+.bottom--header {
+height: 100%;
+background: white;
+width: 100%;
+p {
+    margin: 0;
+    color: #0D1821;
+} 
+}
+
+$colors: (
+  Mint: #00bd9d,
+  "Ghost white": #f6f7fc,
+  "Rich black": #0d1821,
+  "Chinese Violet": #71677c,
+  "Hunter green": #2a6041
+);
+
+$primary-color: map-get($colors, Mint);
+$secondary-color: map-get($colors, "Ghost white");
+$tertiary-color: map-get($colors, "Rich black");
+$quaternary-color: map-get($colors, "Chinese Violet");
+$quinary-color: map-get($colors, "Hunter green");
+
+ion-content {
+    background-color: #71677c;
+  &.ion-text-center {
+    text-align: center;
+    background:#f6f7fc ;
+    font-size: 16px;
+    line-height: 22px;
+    color: #8c8c8c;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 24px;
+    color: $primary-color;
+  }
+
+  ion-icon {
+    font-size: 48px;
+    color: #00bd9d;
+  }
+
+  p {
+    font-size: 18px;
+    color: $tertiary-color;
+  }
+
+  ion-button {
+    background-color: $quaternary-color;
+    color: #000000;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+}
