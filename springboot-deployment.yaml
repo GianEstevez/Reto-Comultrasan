@@ -42,4 +42,4 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 8080
-  type: LoadBalancer # Expose the service with a LoadBalancer
+  type: NodePort
